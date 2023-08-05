@@ -20,4 +20,4 @@ services:
     depends_on:
       - api
     ports:
-      - 80:80
+      - 80:5173
