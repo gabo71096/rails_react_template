@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres:15.3
+    restart: always
+    volumes:
+      - ./api/tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+  api:
+    image: gabo71096/rails_api:1.0
+    user: ruby
+    restart: always
+    build: ./api
+    depends_on:
+      - db
+  client:
+    image: gabo71096/react_client:1.0
+    restart: always
+    build: ./client
+    depends_on:
+      - api
+    ports:
+      - 80:80
