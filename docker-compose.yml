@@ -13,6 +13,8 @@ services:
     build: ./api
     depends_on:
       - db
+    volumes:
+      - ./api:/api
   client:
     image: gabo71096/react_client:1.0
     restart: always
@@ -21,3 +23,5 @@ services:
       - api
     ports:
       - 80:5173
+    volumes:
+      - ./client:/client
