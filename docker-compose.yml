@@ -22,6 +22,6 @@ services:
     depends_on:
       - api
     ports:
-      - 80:5173
+      - 5173:5173
     volumes:
       - ./client:/client
