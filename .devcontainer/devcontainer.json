@@ -8,7 +8,8 @@
   "features": {
     "ghcr.io/devcontainers/features/node:1": {},
     "ghcr.io/devcontainers/features/ruby:1": {},
-    "ghcr.io/devcontainers-contrib/features/postgres-asdf:1": {}
+    "ghcr.io/devcontainers-contrib/features/postgres-asdf:1": {},
+    "ghcr.io/devcontainers-contrib/features/asdf-package:1": {}
   },
   "customizations": {
     "vscode": {
@@ -34,13 +35,12 @@
         "redhat.vscode-yaml"
       ]
     }
-  }
+  },
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "cd api && bundle"
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
-
-  // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "uname -a",
 
   // Configure tool-specific properties.
   // "customizations": {},
