@@ -6,5 +6,6 @@ COPY Gemfile* .
 RUN bundle
 COPY . .
 RUN chown -R ruby:ruby .
+USER ruby
 EXPOSE 3000
 CMD ["rails", "s", "-b", "0.0.0.0"]
