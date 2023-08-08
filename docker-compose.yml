@@ -17,6 +17,8 @@ services:
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b 'api'"
     ports:
       - 3000:3000
+    stdin_open: true
+    tty: true
   client:
     image: gabo71096/react_client:1.0
     restart: always
