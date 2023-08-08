@@ -41,6 +41,12 @@ const requests = {
   get: (url: string, params?: URLSearchParams) => axios.get(url, { params }).then(responseBody),
 };
 
-const agent = {};
+const Home = {
+  root: () => requests.get(""),
+};
+
+const agent = {
+  Home,
+};
 
 export default agent;
