@@ -1,34 +1,23 @@
-import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import railsLogo from "/rails.png";
 import "./App.css";
-import axios from "axios";
-
-const url = "http://localhost:3000/api/v1";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
+import { Outlet } from "react-router-dom";
+import { themeChange } from "theme-change";
+import { useEffect } from "react";
 
 function App() {
-  const [text, setText] = useState({ text: "" });
-
   useEffect(() => {
-    axios.get(url).then((res) => setText(res.data));
+    themeChange(false);
   }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="inline logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="inline logo react" alt="React logo" />
-        </a>
-        <a href="https://rubyonrails.org/" target="_blank">
-          <img src={railsLogo} className="inline logo" alt="Rails logo" />
-        </a>
-      </div>
-      <h1>Vite + React + Rails</h1>
-      <p>{text.text}</p>
+      <select data-choose-theme className="border h-10 rounded">
+        <option value="">Default</option>
+        <option value="dark">Dark</option>
+      </select>
+      <Outlet />
+      <ToastContainer />
     </>
   );
 }
