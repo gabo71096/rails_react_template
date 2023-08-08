@@ -1,46 +1,59 @@
 import reactLogo from "../assets/react.svg";
 import viteLogo from "../assets/vite.svg";
 import railsLogo from "../assets/rails.png";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import agent from "../app/api/agent";
+import LoadingComponent from "../components/LoadingComponent";
+import LoadingButton from "../components/LoadingButton";
 
-const url = "http://localhost:3000/api/v1";
+const logoClasses = "hover:animate-wiggle-more hover:animate-infinite inline h-10";
 
 export default function HomePage() {
   const [loading, setLoading] = useState(false);
   const [text, setText] = useState({ text: "" });
 
-  useEffect(() => {
+  function handleClick() {
     setLoading(true);
-    axios
-      .get(url)
-      .then((res) => setText(res.data))
+    agent.Home.root()
+      .then((res) => setText(res))
       .catch((e) => console.log(e))
       .finally(() => setLoading(false));
-  }, []);
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="inline logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="inline logo react" alt="React logo" />
-        </a>
-        <a href="https://rubyonrails.org/" target="_blank">
-          <img src={railsLogo} className="inline logo" alt="Rails logo" />
-        </a>
+      <div className="hero h-full bg-base-100">
+        <div className="hero-content text-center">
+          <div className="max-w-md">
+            <h1 className="mb-5 text-5xl font-bold"> Vite + React + Rails</h1>
+            <div className="flex justify-evenly mb-5">
+              <a href="https://vitejs.dev" target="_blank">
+                <img src={viteLogo} className={logoClasses} alt="Vite logo" />
+              </a>
+              <a href="https://react.dev" target="_blank">
+                <img src={reactLogo} className={logoClasses} alt="React logo" />
+              </a>
+              <a href="https://rubyonrails.org/" target="_blank">
+                <img src={railsLogo} className={logoClasses} alt="Rails logo" />
+              </a>
+            </div>
+            <div className="mb-5">
+              {loading ? (
+                <LoadingComponent className="text-info w-10" message="Loading..." textSize="text-lg" />
+              ) : (
+                <p>{text.text || "If you click the button below, this text will change."}</p>
+              )}
+            </div>
+            <LoadingButton
+              className="btn btn-primary"
+              handleClick={handleClick}
+              loading={loading}
+              loadingText="Loading..."
+              text="Make API request to backend"
+            />
+          </div>
+        </div>
       </div>
-      <h1>Vite + React + Rails</h1>
-      {loading ? (
-        <span className="relative flex h-5 w-5">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-5 w-5 bg-sky-500"></span>
-        </span>
-      ) : (
-        text.text
-      )}
     </>
   );
 }
