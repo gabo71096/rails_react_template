@@ -5,6 +5,7 @@ import { useState } from "react";
 import agent from "../app/api/agent";
 import LoadingComponent from "../components/LoadingComponent";
 import LoadingButton from "../components/LoadingButton";
+import { toast } from "react-toastify";
 
 const logoClasses = "hover:animate-wiggle-more hover:animate-infinite inline h-10";
 
@@ -14,10 +15,17 @@ export default function HomePage() {
 
   function handleClick() {
     setLoading(true);
-    agent.Home.root()
-      .then((res) => setText(res))
-      .catch((e) => console.log(e))
-      .finally(() => setLoading(false));
+    toast.promise(
+      agent.Home.root()
+        .then((res) => setText(res))
+        .catch((e) => console.log(e))
+        .finally(() => setLoading(false)),
+      {
+        pending: "Loading...",
+        success: "Success!",
+        error: "Error",
+      },
+    );
   }
 
   return (
