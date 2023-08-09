@@ -1,18 +1,16 @@
 import { Link } from "react-router-dom";
 import { LuMoon, LuSun } from "react-icons/lu";
 import Icon from "./Icon";
-import { ChangeEvent, useState } from "react";
+import { toggle } from "./darkModeSlice";
+import { useAppSelector, useAppDispatch } from "../app/store";
 
 export default function Header() {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const { darkMode } = useAppSelector((state) => state.darkMode);
+  const dispatch = useAppDispatch();
+  const theme = darkMode ? "dark" : "light";
 
   localStorage.setItem("theme", theme);
   document.querySelector("html")?.setAttribute("data-theme", theme);
-
-  function handleToggle(e: ChangeEvent<HTMLInputElement>) {
-    if (e.target.checked) setTheme("dark");
-    else setTheme("light");
-  }
 
   return (
     <div className="navbar bg-base-200">
@@ -21,7 +19,7 @@ export default function Header() {
       </div>
       <div>
         <label className="swap swap-rotate">
-          <input checked={theme === "light" ? false : true} type="checkbox" onChange={handleToggle} />
+          <input checked={darkMode} type="checkbox" onChange={() => dispatch(toggle())} />
           <Icon icon={<LuMoon />} values={{ size: "1.5rem", className: "swap-on" }} />
           <Icon icon={<LuSun />} values={{ size: "1.5rem", className: "swap-off" }} />
         </label>
