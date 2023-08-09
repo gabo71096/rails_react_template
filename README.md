@@ -6,7 +6,7 @@ for anyone that uses a setup like this.
 I don't consider it production ready, as this was built thinking on the development environment,
 but I don't think it requires much configuration to make it secure enough for production.
 
-![demo](https://github.com/gabo71096/rails_react_template/assets/18217269/c8767f1f-fc16-484a-91a0-680882ffb768)
+https://github.com/gabo71096/rails_react_template/assets/18217269/af727dfb-c0bd-4fce-87b0-ddafb3e1b1b2
 
 # Try it out
 
