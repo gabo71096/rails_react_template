@@ -30,3 +30,8 @@
 
 # Byebug
 .byebug_history
+
+# React
+/public/assets
+/public/index.html
+/public/vite.svg
