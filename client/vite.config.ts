@@ -8,4 +8,12 @@ export default defineConfig({
     outDir: "../api/public",
     emptyOutDir: true,
   },
+  server: {
+    proxy: {
+      "/api/v1": {
+        target: "http://api:3000",
+        changeOrigin: true,
+      },
+    },
+  },
 });
