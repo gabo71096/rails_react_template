@@ -9,7 +9,13 @@ services:
   api:
     image: gabo71096/rails_api:1.0
     restart: always
-    build: ./api
+    build:
+      context: ./api
+      args:
+        RAILS_ENV: development
+        RAILS_SERVE_STATIC_FILES: false
+        RAILS_LOG_TO_STDOUT: false
+        BUNDLE_WITHOUT:
     depends_on:
       - db
     volumes:
