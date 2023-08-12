@@ -9,7 +9,7 @@ const responseBody = (response: AxiosResponse) => response.data;
 
 axios.interceptors.response.use(
   async (res) => {
-    await sleep();
+    if (import.meta.env.MODE === "development") await sleep();
     return res;
   },
   (error: AxiosError) => {
